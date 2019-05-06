@@ -1,0 +1,16 @@
+ <Divider />
+        <List>
+          <ListItem button key="Nueva denuncia">
+            <ListItemIcon> <AddAlertIcon /> </ListItemIcon>
+              <ListItemText primary="Nueva denuncia" />
+          </ListItem>
+          <ListItem button key="Denuncias Resultas">
+            <ListItemIcon> <SearchIcon /> </ListItemIcon>
+              <ListItemText primary="Denuncias resultas" />
+          </ListItem>
+          <ListItem button key="Contacto">
+            <ListItemIcon> <PermContactCalendarIcon /> </ListItemIcon>
+              <ListItemText primary="Contacto" />
+          </ListItem>
+        </List>
+        <Divider />

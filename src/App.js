@@ -6,12 +6,10 @@ import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
 import AddAlertIcon from '@material-ui/icons/AddAlert';
 import SearchIcon from '@material-ui/icons/Search';
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
@@ -19,7 +17,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-
+import ReactDOM from 'react-dom';
+import Map from './Map';
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -50,9 +49,10 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing.unit * 2,
   },
 });
+
 
 class ResponsiveDrawer extends React.Component {
   state = {
@@ -63,7 +63,29 @@ class ResponsiveDrawer extends React.Component {
     this.setState(state => ({ mobileOpen: !state.mobileOpen }));
   };
 
+  
+  handleClick(element) {
+     
+    switch(element){
+      case 'denuncia':
+      console.log("owo")
+      ReactDOM.render(<Map />, document.getElementById('mainContent'));
+      break;
+      case 'resulta':
+      break;
+      case 'contacto':
+      break;
+      case 'ayuda':
+      break;
+      default:
+        console.log('default');
+    }
+  }
+  
+
   render() {
+    
+
     const { classes, theme } = this.props;
 
     const drawer = (
@@ -71,11 +93,11 @@ class ResponsiveDrawer extends React.Component {
         <div className={classes.toolbar} />
         <Divider />
         <List>
-          <ListItem button key="Nueva denuncia">
+          <ListItem button id="denuncia" onClick= {()=> this.handleClick(document.getElementById('denuncia').id) } >
             <ListItemIcon> <AddAlertIcon /> </ListItemIcon>
               <ListItemText primary="Nueva denuncia" />
           </ListItem>
-          <ListItem button key="Denuncias Resultas">
+          <ListItem button id="Denuncias Resultas">
             <ListItemIcon> <SearchIcon /> </ListItemIcon>
               <ListItemText primary="Denuncias resultas" />
           </ListItem>
@@ -136,35 +158,17 @@ class ResponsiveDrawer extends React.Component {
         </nav>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Typography paragraph>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent
-            elementum facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in
-            hendrerit gravida rutrum quisque non tellus. Convallis convallis tellus id interdum
-            velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing.
-            Amet nisl suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod quis
-            viverra nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum leo.
-            Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus
-            at augue. At augue eget arcu dictum varius duis at consectetur lorem. Velit sed
-            ullamcorper morbi tincidunt. Lorem donec massa sapien faucibus et molestie ac.
-          </Typography>
-          <Typography paragraph>
-            Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-            facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-            tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-            consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus
-            sed vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in.
-            In hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-            et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique
-            sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo
-            viverra maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam
-            ultrices sagittis orci a.
-          </Typography>
+          <div id="mainContent">
+
+          </div>
         </main>
       </div>
     );
   }
 }
+
+
+
 
 ResponsiveDrawer.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -173,5 +177,7 @@ ResponsiveDrawer.propTypes = {
   container: PropTypes.object,
   theme: PropTypes.object.isRequired,
 };
+
+
 
 export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);

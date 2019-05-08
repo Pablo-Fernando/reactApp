@@ -65,7 +65,7 @@ class ResponsiveDrawer extends React.Component {
 
   
   handleClick(element) {
-     
+
     switch(element){
       case 'denuncia':
         ReactDOM.render(<Map />, document.getElementById('mainContent'));

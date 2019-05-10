@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
@@ -19,7 +18,37 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import ReactDOM from 'react-dom';
 import Map from './Map';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+
+
 const drawerWidth = 240;
+
+
+const cardStyle = {
+  card: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+};
+
+const darkTheme = createMuiTheme({
+	palette: {
+
+    type: 'dark', // Switching the dark mode on is a single property value change.
+	},
+	typography: { useNextVariants: true },
+});
 
 const styles = theme => ({
   root: {
@@ -30,6 +59,7 @@ const styles = theme => ({
       width: drawerWidth,
       flexShrink: 0,
     },
+    
   },
   appBar: {
     marginLeft: drawerWidth,
@@ -63,7 +93,8 @@ class ResponsiveDrawer extends React.Component {
     this.setState(state => ({ mobileOpen: !state.mobileOpen }));
   };
 
-  
+
+
   handleClick(element) {
 
     switch(element){
@@ -88,94 +119,85 @@ class ResponsiveDrawer extends React.Component {
     const { classes, theme } = this.props;
 
     const drawer = (
-      <div>
-        <div className={classes.toolbar} />
-        <Divider />
-        <List>
-          <ListItem button id="denuncia" onClick= {()=> this.handleClick(document.getElementById('denuncia').id) } >
-            <ListItemIcon> <AddAlertIcon /> </ListItemIcon>
-              <ListItemText primary="Nueva denuncia" />
-          </ListItem>
-          <ListItem button id="Denuncias Resultas">
-            <ListItemIcon> <SearchIcon /> </ListItemIcon>
-              <ListItemText primary="Denuncias resultas" />
-          </ListItem>
-          <ListItem button key="Contacto">
-            <ListItemIcon> <PermContactCalendarIcon /> </ListItemIcon>
-              <ListItemText primary="Contacto" />
-          </ListItem>
-        </List>
-        <Divider />
-      </div>
+      
+        <div>
+          <div className={classes.toolbar} />
+          <Divider />
+          <List>
+            <ListItem button id="denuncia" onClick= {()=> this.handleClick(document.getElementById('denuncia').id) } >
+              <ListItemIcon> <AddAlertIcon /> </ListItemIcon>
+                <ListItemText primary="Nueva denuncia" />
+            </ListItem>
+            <ListItem button id="Denuncias Resultas">
+              <ListItemIcon> <SearchIcon /> </ListItemIcon>
+                <ListItemText primary="Denuncias resultas" />
+            </ListItem>
+            <ListItem button key="Contacto">
+              <ListItemIcon> <PermContactCalendarIcon /> </ListItemIcon>
+                <ListItemText primary="Contacto" />
+            </ListItem>
+          </List>
+          <Divider />
+        </div>
     );
 
     return (
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.handleDrawerToggle}
-              className={classes.menuButton}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" color="inherit" noWrap>
-              Watchicol
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <nav className={classes.drawer}>
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-          <Hidden smUp implementation="css">
-            <Drawer
-              container={this.props.container}
-              variant="temporary"
-              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-              open={this.state.mobileOpen}
-              onClose={this.handleDrawerToggle}
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation="css">
-            <Drawer
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              variant="permanent"
-              open
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-        </nav>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <div id="mainContent">
-
-          </div>
-        </main>
-      </div>
+      <MuiThemeProvider theme={darkTheme}>
+        <div className={classes.root}>
+          <CssBaseline />
+          <AppBar position="fixed" className={classes.appBar}>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="Open drawer"
+                onClick={this.handleDrawerToggle}
+                className={classes.menuButton}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h2" color="inherit" noWrap>
+                Watchicol
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <nav className={classes.drawer}>
+            {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+            <Hidden smUp implementation="css">
+              <Drawer
+                container={this.props.container}
+                variant="temporary"
+                anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+                open={this.state.mobileOpen}
+                onClose={this.handleDrawerToggle}
+                classes={{
+                  paper: classes.drawerPaper,
+                }}
+              >
+                {drawer}
+              </Drawer>
+            </Hidden>
+            <Hidden xsDown implementation="css">
+              <Drawer
+                classes={{
+                  paper: classes.drawerPaper,
+                }}
+                variant="permanent"
+                open
+              >
+                {drawer}
+              </Drawer>
+            </Hidden>
+          </nav>
+          <main  className={classes.content}>
+            <div className={classes.toolbar} />
+            <div id="mainContent"></div>
+          </main>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
 
-
-
-
-ResponsiveDrawer.propTypes = {
-  classes: PropTypes.object.isRequired,
-  // Injected by the documentation to work in an iframe.
-  // You won't need it on your project.
-  container: PropTypes.object,
-  theme: PropTypes.object.isRequired,
-};
 
 
 

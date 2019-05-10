@@ -1,8 +1,7 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl'
-import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
-import {geolocated} from 'react-geolocated';
+import 'mapbox-gl/dist/mapbox-gl.css'; 
+
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
 
@@ -46,20 +45,19 @@ class Map extends React.Component {
   
   render() {
     const style = {
-      position: 'relative',
-      top: 10,
-      bottom: 10,
-      width: '60vw',
-      height: '60vh'
+      position: 'absolute',
+      width: '80%',
+      height: '80%'
     };
 
     return (
-      <div>
-        <center><h1>Nueva Denuncia</h1></center>
+      <div color="primary">
+        <h1>Nueva Denuncia</h1>
           <div id="content" style={style} ref={el => this.mapContainer = el} />
-        </div>
+      </div>
     );
   }
+  
 }
 
 export default Map

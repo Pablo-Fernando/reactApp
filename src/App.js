@@ -155,7 +155,7 @@ class ResponsiveDrawer extends React.Component {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h2" color="inherit" noWrap>
+              <Typography variant="display3" color="inherit" noWrap>
                 Watchicol
               </Typography>
             </Toolbar>

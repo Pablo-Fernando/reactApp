@@ -27,6 +27,7 @@ class Map extends React.Component {
   }
   
   componentDidMount() {
+    
     this.getLocation()
   }
 
@@ -57,9 +58,8 @@ class Map extends React.Component {
       })
       .setLngLat([this.state.lng,this.state.lat])
       .addTo(map);
-       
+
       
-       
       marker.on('dragend', onDragEnd.bind(this));
 
       map.addControl(new MapboxGeocoder({
@@ -109,14 +109,14 @@ class Map extends React.Component {
   
   render() {
     const style = {
-      position: 'absolute',
-      width: '80%',
-      height: '80%'
+      position: 'fixed',
+      width: '100%',
+      height: '100%'
     };
 
     return (
       <MuiThemeProvider theme={darkTheme}>
-        <Typography variant="display2" color="main">Nueva denuncia</Typography>
+        <Typography variant="h2" >Nueva denuncia</Typography>
         <div id="content" style={style} ref={el => this.mapContainer = el} />
       </MuiThemeProvider>
     );

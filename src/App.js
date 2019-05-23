@@ -18,11 +18,14 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import ReactDOM from 'react-dom';
 import Map from './Map';
+import Contacto from './Contacto'
+import Ayuda from './Ayuda'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 
 
 const drawerWidth = 240;
+
 
 
 const cardStyle = {
@@ -101,11 +104,14 @@ class ResponsiveDrawer extends React.Component {
       case 'denuncia':
         ReactDOM.render(<Map />, document.getElementById('mainContent'));
       break;
-      case 'resulta':
+      case 'resuelta':
+        //ReactDOM.render(<MapResolved/>,document.getElementById('mainContent'));
       break;
       case 'contacto':
+        ReactDOM.render(<Contacto/>, document.getElementById('mainContent'));
       break;
       case 'ayuda':
+        ReactDOM.render (<Ayuda/>,document.getElementById('mainContent'));
       break;
       default:
         console.log('default');
@@ -119,26 +125,38 @@ class ResponsiveDrawer extends React.Component {
     const { classes, theme } = this.props;
 
     const drawer = (
-      
-        <div>
-          <div className={classes.toolbar} />
-          <Divider />
-          <List>
-            <ListItem button id="denuncia" onClick= {()=> this.handleClick(document.getElementById('denuncia').id) } >
-              <ListItemIcon> <AddAlertIcon /> </ListItemIcon>
-                <ListItemText primary="Nueva denuncia" />
-            </ListItem>
-            <ListItem button id="Denuncias Resultas">
-              <ListItemIcon> <SearchIcon /> </ListItemIcon>
-                <ListItemText primary="Denuncias resultas" />
-            </ListItem>
-            <ListItem button key="Contacto">
-              <ListItemIcon> <PermContactCalendarIcon /> </ListItemIcon>
-                <ListItemText primary="Contacto" />
-            </ListItem>
-          </List>
-          <Divider />
-        </div>
+      <div>  
+        <div className={classes.toolbar} />
+        <Divider />
+        <List>
+          <ListItem button id="denuncia" onClick= {()=> this.handleClick(document.getElementById('denuncia').id) } >
+            <ListItemIcon> 
+              <AddAlertIcon /> 
+            </ListItemIcon>
+            <ListItemText primary="Nueva denuncia" />
+          </ListItem>
+          <ListItem button id="Denuncias Resultas">
+            <ListItemIcon> 
+              <SearchIcon /> 
+            </ListItemIcon>
+              <ListItemText primary="Denuncias resultas" />
+          </ListItem>
+          <ListItem button id="contacto"  onClick= {()=> this.handleClick(document.getElementById('contacto').id) }>
+            <ListItemIcon>
+              <PermContactCalendarIcon /> 
+            </ListItemIcon>
+            <ListItemText primary="Contacto" />
+          </ListItem>
+          <ListItem>
+            <ListItemIcon button id="ayuda"  onClick= {()=> this.handleClick(document.getElementById('ayuda').id) }>
+              <PermContactCalendarIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Ayuda"/>
+          </ListItem>
+        </List>
+        <Divider />
+      </div>
+        
     );
 
     return (
@@ -155,7 +173,7 @@ class ResponsiveDrawer extends React.Component {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="display3" color="inherit" noWrap>
+              <Typography variant="h2" color="inherit" noWrap>
                 Watchicol
               </Typography>
             </Toolbar>
@@ -190,7 +208,8 @@ class ResponsiveDrawer extends React.Component {
           </nav>
           <main  className={classes.content}>
             <div className={classes.toolbar} />
-            <div id="mainContent"></div>
+              <div id="mainContent">
+              </div>
           </main>
         </div>
       </MuiThemeProvider>
